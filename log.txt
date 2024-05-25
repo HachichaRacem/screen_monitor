@@ -1,0 +1,573 @@
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-24 18:25:56.521320] Connceted
+[INFO - 2024-05-24 18:25:56.538965] Connected clients: [1]
+[INFO - 2024-05-24 18:26:49.847166] Unknown message: {type: MOBILE_TRIGGER_URGENT_ACTION}
+[INFO - 2024-05-24 18:26:50.823955] Shutdown urgent action timer is about to begin
+h payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 18:27:00.826835] PC should be shutting down now
+ake place
+[INFO - 2024-05-24 18:27:01.208966] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 18:27:45.169306] Unknown message: {type: UPDATE_UPLOAD_TIMER, error: null}
+[ERROR - 2024-05-24 18:28:14.852939] Failed to update upload timer (TIMEOUT)
+[INFO - 2024-05-24 18:31:01.265480] Disconnected
+[INFO - 2024-05-24 18:31:01.776985] Reconnected
+[INFO - 2024-05-24 18:31:01.784243] Connected clients: []
+[INFO - 2024-05-24 18:31:01.857970] Connected clients: [1]
+[INFO - 2024-05-24 18:31:13.345138] Shutdown urgent action timer is about to begin
+h payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 18:31:15.560734] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 18:33:18.942984] Shutdown urgent action timer is about to begin
+h payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 18:33:22.941353] Shutdown urgent action cancelled by user
+ed with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[ERROR - 2024-05-24 18:34:03.774440] Failed to update upload timer (TIMEOUT)
+[INFO - 2024-05-24 18:35:14.711283] Unknown message: {type: UPDATE_URGENT_TIMER, error: null}
+[ERROR - 2024-05-24 18:35:44.395693] Failed to update urgent timer (TIMEOUT)
+[INFO - 2024-05-24 18:36:05.031599] Disconnected
+[INFO - 2024-05-24 18:36:05.550068] Reconnected
+[INFO - 2024-05-24 18:36:05.557620] Connected clients: []
+[INFO - 2024-05-24 18:36:05.628666] Connected clients: [1]
+[INFO - 2024-05-24 18:36:14.075965] Unknown update: {type: UPDATE, updated: UPDATE_URGENT_TIMER, value: 20, extra: null}
+[INFO - 2024-05-24 18:36:37.674914] Disconnected
+[INFO - 2024-05-24 18:36:38.182376] Reconnected
+[INFO - 2024-05-24 18:36:38.184888] Connected clients: []
+[INFO - 2024-05-24 18:36:38.210226] Connected clients: [1]
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-24 18:36:44.966479] Connected clients: [1]
+[INFO - 2024-05-24 18:37:29.441441] Executing process...
+[INFO - 2024-05-24 18:37:29.786533] Screenshot taken
+[INFO - 2024-05-24 18:37:31.399547] Compressed capture - from 573411 bytes to 459970 bytes
+[INFO - 2024-05-24 18:37:38.203913] Unknown message: {type: CAPTURE_UPLOAD_SUCCESS, captureURL: https://syafsyqkngwqxtlycvmb.supabase.co/storage/v1/object/sign/screenshots/ss.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzY3JlZW5zaG90cy9zcy5wbmciLCJpYXQiOjE3MTY1NzIyNTgsImV4cCI6MTc0ODEwODI1OH0.xdo-MsISgRVFpP0g80nOpe9LyM3zZoOl0iRdwCj2i3Y}
+[INFO - 2024-05-24 18:39:17.826987] Disconnected
+[INFO - 2024-05-24 18:39:18.353627] Reconnected
+[INFO - 2024-05-24 18:39:18.365072] Connected clients: []
+[INFO - 2024-05-24 18:39:18.382052] Connected clients: [1]
+[INFO - 2024-05-24 18:39:23.001603] Process finished, starting timer...
+
+[INFO - 2024-05-24 18:39:58.004986] Executing process...
+d, canceled timer and now restarting process...
+[INFO - 2024-05-24 18:39:58.196651] Screenshot taken
+[INFO - 2024-05-24 18:39:59.999624] Uploading capture
+ - from 482723 bytes to 432418 bytes
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-24 18:40:06.306229] Connected clients: [1]
+[INFO - 2024-05-24 18:40:45.376444] Disconnected
+[INFO - 2024-05-24 18:40:45.936255] Reconnected
+[INFO - 2024-05-24 18:40:45.977739] Connected clients: [1]
+[INFO - 2024-05-24 18:42:29.630026] Executing process...
+[INFO - 2024-05-24 18:42:29.811566] Screenshot taken
+[INFO - 2024-05-24 18:42:31.422269] Uploading capture
+ - from 468684 bytes to 416021 bytes
+[ERROR - 2024-05-24 18:42:37.216270] Failed to upload capture (response failed from server) : null
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-24 18:43:29.615359] Connceted
+[INFO - 2024-05-24 18:43:29.636473] Connected clients: [1]
+[INFO - 2024-05-24 18:43:44.947063] Executing process...
+[INFO - 2024-05-24 18:43:45.128916] Screenshot taken
+[INFO - 2024-05-24 18:43:46.975880] Uploading capture
+ - from 473277 bytes to 423907 bytes
+[ERROR - 2024-05-24 18:43:52.914298] Failed to upload capture (response failed from server) : null
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-24 18:45:27.541881] Connected clients: [1]
+[INFO - 2024-05-24 18:45:29.790024] Executing process...
+[INFO - 2024-05-24 18:45:29.972055] Screenshot taken
+[INFO - 2024-05-24 18:45:31.777978] Uploading capture
+ - from 501208 bytes to 457583 bytes
+[ERROR - 2024-05-24 18:45:37.844221] Failed to upload capture (response failed from server) : null
+lue: https://syafsyqkngwqxtlycvmb.supabase.co/storage/v1/object/sign/screenshots/ss.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzY3JlZW5zaG90cy9zcy5wbmciLCJpYXQiOjE3MTY1NzI3MzcsImV4cCI6MTc0ODEwODczN30.bQ_6dykLMjiAde_pMvonQLMbU-3brMFSIAOBXwybuI4, extra: null}
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-24 18:46:29.774877] Connected clients: [1]
+[INFO - 2024-05-24 18:46:35.574187] Executing process...
+[INFO - 2024-05-24 18:46:35.744080] Screenshot taken
+[INFO - 2024-05-24 18:46:37.462197] Uploading capture
+ - from 512627 bytes to 471718 bytes
+[INFO - 2024-05-24 18:46:45.106640] Received capture successfully
+[INFO - 2024-05-24 18:46:47.766818] Process finished, starting timer...
+
+[INFO - 2024-05-24 18:47:22.770051] Executing process...
+d, canceled timer and now restarting process...
+[INFO - 2024-05-24 18:47:22.997556] Screenshot taken
+[INFO - 2024-05-24 18:47:24.688607] Uploading capture
+ - from 521399 bytes to 487242 bytes
+[INFO - 2024-05-24 18:47:31.344829] Received capture successfully
+[INFO - 2024-05-24 18:47:32.778806] Process finished, starting timer...
+
+[INFO - 2024-05-24 18:47:39.779154] Process stopped by user
+Instance "GetMaterialController" has been created
+zed
+[INFO - 2024-05-24 18:54:34.177911] Connected clients: [1]
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-24 18:55:40.379185] Connected clients: [1]
+[INFO - 2024-05-24 19:00:46.947316] Shutdown urgent action timer is about to begin
+h payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 19:00:56.471922] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 19:03:02.669739] Disconnected
+[INFO - 2024-05-24 19:03:03.194703] Reconnected
+[INFO - 2024-05-24 19:03:03.212] Connected clients: []
+[INFO - 2024-05-24 19:03:03.268603] Connected clients: [1]
+[INFO - 2024-05-24 19:03:04.269518] Disconnected
+[INFO - 2024-05-24 19:03:04.787849] Reconnected
+[INFO - 2024-05-24 19:03:04.791311] Connected clients: []
+[INFO - 2024-05-24 19:03:04.819107] Connected clients: [1]
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-24 19:09:02.704874] Connected clients: [1]
+[INFO - 2024-05-24 19:09:08.861922] Connected clients: []
+[INFO - 2024-05-24 19:09:11.924519] Connected clients: [1]
+[INFO - 2024-05-24 19:09:21.490724] Shutdown urgent action timer is about to begin
+h payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 19:09:22.512139] Disconnected
+[INFO - 2024-05-24 19:09:51.493638] Shutdown urgent action should take place
+[INFO - 2024-05-24 19:09:51.494633] PC should be shutting down now
+[INFO - 2024-05-24 19:09:51.558468] Reconnected
+[INFO - 2024-05-24 19:09:51.561722] Connected clients: []
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-24 19:10:03.892125] Connected clients: []
+[INFO - 2024-05-24 19:10:07.038628] Connected clients: [1]
+[INFO - 2024-05-24 19:10:19.851134] Shutdown urgent action cancelled by user
+ed with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 19:10:32.558151] Shutdown urgent action timer is about to begin
+h payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 19:10:46.593600] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 19:10:46.594612] Shutdown urgent action cancelled by user
+[INFO - 2024-05-24 19:11:26.676485] Shutdown urgent action timer is about to begin
+h payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 19:11:31.768899] Shutdown urgent action cancelled by user
+ed with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-24 19:12:49.706299] Connected clients: [1]
+[INFO - 2024-05-24 19:12:52.417511] Connected clients: []
+[INFO - 2024-05-24 19:12:55.589952] Connected clients: [1]
+[INFO - 2024-05-24 19:13:02.986691] Shutdown urgent action timer is about to begin
+h payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 19:13:26.576603] Shutdown urgent action cancelled by user
+ed with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 19:15:01.815986] Connected clients: []
+[INFO - 2024-05-24 19:15:04.868875] Connected clients: [1]
+[INFO - 2024-05-24 19:15:10.164392] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 19:15:10.165462] Shutdown urgent action timer is about to begin
+[INFO - 2024-05-24 19:15:18.419833] Shutdown urgent action cancelled by user
+ed with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 19:17:05.717972] Disconnected
+[INFO - 2024-05-24 19:17:06.241884] Reconnected
+[INFO - 2024-05-24 19:17:06.249894] Connected clients: []
+[INFO - 2024-05-24 19:17:06.285751] Connected clients: [1]
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-24 19:17:41.327295] Connceted
+clients: [1]
+[INFO - 2024-05-24 19:17:45.513282] Connected clients: []
+[INFO - 2024-05-24 19:17:48.545951] Connected clients: [1]
+[INFO - 2024-05-24 19:17:55.027469] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 19:18:00.288881] Shutdown urgent action cancelled by user
+ed with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 19:19:14.399437] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 19:19:14.402133] Shutdown urgent action timer is about to begin
+[INFO - 2024-05-24 19:19:24.408555] PC should be shutting down now
+ake place
+[INFO - 2024-05-24 19:19:24.999904] Shutdown urgent action cancelled by user
+ed with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 19:19:30.331264] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 19:19:30.332847] Shutdown urgent action timer is about to begin
+[INFO - 2024-05-24 19:19:40.335295] PC should be shutting down now
+ake place
+[INFO - 2024-05-24 19:19:40.863837] Shutdown urgent action cancelled by user
+ed with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 19:21:56.987039] Connected clients: []
+[INFO - 2024-05-24 19:22:00.394269] Connected clients: [1]
+[INFO - 2024-05-24 19:22:04.704515] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 19:22:04.705511] Shutdown urgent action timer is about to begin
+[INFO - 2024-05-24 19:22:14.708558] PC should be shutting down now
+ake place
+[INFO - 2024-05-24 19:22:15.246285] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 19:22:15.247193] Shutdown urgent action cancelled by user
+[INFO - 2024-05-24 19:22:19.904320] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 19:22:19.904320] Shutdown urgent action timer is about to begin
+[INFO - 2024-05-24 19:22:21.923975] Shutdown urgent action cancelled by user
+[INFO - 2024-05-24 19:22:21.923975] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 19:22:48.746146] Shutdown urgent action timer is about to begin
+h payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: true, extra: {urgentAction: 0}}
+[INFO - 2024-05-24 19:22:58.748402] Shutdown urgent action should take place
+[INFO - 2024-05-24 19:22:59.290579] _handleIsUrgentActionActive has been called with payload: {type: UPDATE, updated: IS_URGENT_ACTION_ACTIVE, value: false, extra: null}
+[INFO - 2024-05-24 19:22:59.290579] Shutdown urgent action cancelled by user
+[INFO - 2024-05-24 19:34:54.414482] Connected clients: [1]
+1]
+[INFO - 2024-05-24 19:35:51.428975] Network bandwith fetched: [
+    {
+        "interfaceDescription":  "Bluetooth Device (Personal Area Network)",
+        "name":  "Bluetooth Network Connection",
+        "Status":  "Disconnected",
+        "LinkSpeed":  "3 Mbps"
+    },
+    {
+        "interfaceDescription":  "Realtek PCIe GbE Family Controller",
+        "name":  "Ethernet",
+        "Status":  "Disconnected",
+        "LinkSpeed":  "0 bps"
+    },
+    {
+        "interfaceDescription":  "Intel(R) Wi-Fi 6 AX201 160MHz",
+        "name":  "Wi-Fi",
+        "Status":  "Up",
+        "LinkSpeed":  "270 Mbps"
+    }
+]
+
+[INFO - 2024-05-24 19:37:32.161600] Network bandwith: [{interfaceDescription: Bluetooth Device (Personal Area Network), name: Bluetooth Network Connection, Status: Disconnected, LinkSpeed: 3 Mbps}, {interfaceDescription: Realtek PCIe GbE Family Controller, name: Ethernet, Status: Disconnected, LinkSpeed: 0 bps}, {interfaceDescription: Intel(R) Wi-Fi 6 AX201 160MHz, name: Wi-Fi, Status: Up, LinkSpeed: 270 Mbps}]
+[INFO - 2024-05-24 19:38:58.409649] Network bandwith: {interfaceDescription: Intel(R) Wi-Fi 6 AX201 160MHz, name: Wi-Fi, Status: Up, LinkSpeed: 270 Mbps}
+[INFO - 2024-05-24 20:12:15.793046] Connected clients: [1, 1]
+[INFO - 2024-05-24 20:12:15.793046] Connected clients: [1]
+[INFO - 2024-05-24 20:20:14.327450] Connected clients: [1, 1]
+[INFO - 2024-05-24 20:20:14.331895] Connected clients: [1]
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-24 23:09:45.579547] Disconnected
+[INFO - 2024-05-24 23:10:37.942139] Reconnected
+[INFO - 2024-05-24 23:10:37.956072] Connected clients: []
+[INFO - 2024-05-24 23:10:44.547384] Interface name : 
+interfaceDescription         
+--------------------         
+Intel(R) Wi-Fi 6 AX201 160MHz
+
+
+
+[INFO - 2024-05-24 23:11:12.717064] Interface name : {
+    "interfaceDescription":  "Intel(R) Wi-Fi 6 AX201 160MHz"
+}
+
+[INFO - 2024-05-24 23:11:48.196373] Interface name : Intel(R) Wi-Fi 6 AX201 160MHz
+[INFO - 2024-05-24 23:12:11.624471] Interface name : intel(r) wi-fi 6 ax201 160mhz
+[INFO - 2024-05-24 23:17:57.068556] Interface name : Intel(R) Wi-Fi 6 AX201 160MHz
+[INFO - 2024-05-24 23:18:09.204058] Interface name : Intel[R] Wi-Fi 6 AX201 160MHz
+[INFO - 2024-05-24 23:20:24.821153] Received bytes : 16352832030
+[ERROR - 2024-05-24 23:22:38.386755] Failed to fetch network bandwidth (ERROR) - Get-Counter : The \Network Interface(Intel(R) Wi-Fi 6 AX201 160MHz)\Bytes Received/sec performance counter path  is 
+not valid.
+At line:1 char:1
++ Get-Counter "\Network Interface(Intel(R) Wi-Fi 6 AX201 160MHz)\Bytes  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidResult: (:) [Get-Counter], Exception
+    + FullyQualifiedErrorId : CounterPathIsInvalid,Microsoft.PowerShell.Commands.GetCounterCommand
+ 
+
+[INFO - 2024-05-24 23:23:28.137885] Received bytes: {
+    "Timestamp":  "\/Date(1716589408046)\/",
+    "CounterSamples":  [
+                           {
+                               "Path":  "\\\\racem\\network interface(intel[r] wi-fi 6 ax201 160mhz)\\bytes received/sec",
+                               "InstanceName":  "intel[r] wi-fi 6 ax201 160mhz",
+                               "CookedValue":  232.54780869901722,
+                               "RawValue":  16357429611,
+                               "SecondValue":  6966655199990,
+                               "MultipleCount":  1,
+                               "CounterType":  272696576,
+                               "Timestamp":  "\/Date(1716589408046)\/",
+                               "Timestamp100NSec":  133610666080460000,
+                               "Status":  0,
+                               "DefaultScale":  4294967292,
+                               "TimeBase":  10000000
+                           }
+                       ],
+    "Readings":  "\\\\racem\\network interface(intel[r] wi-fi 6 ax201 160mhz)\\bytes received/sec :\n232.547808699017\n\n"
+}
+
+[INFO - 2024-05-24 23:37:49.689394] Received bytes: {
+    "Timestamp":  "\/Date(1716590269611)\/",
+    "CounterSamples":  [
+                           {
+                               "Path":  "\\\\racem\\network interface(intel[r] wi-fi 6 ax201 160mhz)\\bytes received/sec",
+                               "InstanceName":  "intel[r] wi-fi 6 ax201 160mhz",
+                               "CookedValue":  4475.4374346424211,
+                               "RawValue":  16361012175,
+                               "SecondValue":  6975270843042,
+                               "MultipleCount":  1,
+                               "CounterType":  272696576,
+                               "Timestamp":  "\/Date(1716590269611)\/",
+                               "Timestamp100NSec":  133610674696110000,
+                               "Status":  0,
+                               "DefaultScale":  4294967292,
+                               "TimeBase":  10000000
+                           }
+                       ],
+    "Readings":  "\\\\racem\\network interface(intel[r] wi-fi 6 ax201 160mhz)\\bytes received/sec :\n4475.43743464242\n\n"
+}
+
+[INFO - 2024-05-24 23:39:51.883244] Received bytes: 6828.989867150799
+[INFO - 2024-05-24 23:39:59.632297] Received bytes: 360.73972934072646
+[INFO - 2024-05-24 23:40:02.994300] Received bytes: 295.4979993307955
+[INFO - 2024-05-24 23:40:58.409481] Network bandwidth: 405.5609328099289 kb/s
+[INFO - 2024-05-24 23:42:34.598770] Network bandwidth: 482.3755746447914 bytes/s
+[INFO - 2024-05-24 23:42:55.577563] Network bandwidth: 0.3361685869234593 KB/s
+[INFO - 2024-05-24 23:42:59.627900] Network bandwidth: 0.6228492392918015 KB/s
+[INFO - 2024-05-24 23:43:02.705889] Network bandwidth: 3.8744767801511713 KB/s
+[INFO - 2024-05-24 23:43:05.658305] Network bandwidth: 0.4162955409626838 KB/s
+[INFO - 2024-05-24 23:46:02.947656] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:46:07.317595] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:46:10.396488] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:46:12.186467] Network bandwidth: 5 KB/s
+[INFO - 2024-05-24 23:46:14.309101] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:46:16.389313] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:46:17.807512] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:46:18.593016] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:46:19.828353] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:46:20.994082] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:46:22.278328] Network bandwidth: 9 KB/s
+[INFO - 2024-05-24 23:46:37.259602] Network bandwidth: 866 KB/s
+[INFO - 2024-05-24 23:46:40.591551] Network bandwidth: 429 KB/s
+[INFO - 2024-05-24 23:46:43.585557] Network bandwidth: 219 KB/s
+[INFO - 2024-05-24 23:46:46.727634] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:46:49.577559] Network bandwidth: 723 KB/s
+[INFO - 2024-05-24 23:49:33.306060] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:49:38.543162] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:49:41.571560] Network bandwidth: 4 KB/s
+[INFO - 2024-05-24 23:49:44.637505] Network bandwidth: 10 KB/s
+[INFO - 2024-05-24 23:49:49.085153] Network bandwidth: 0 KB/s
+[INFO - 2024-05-24 23:51:16.027739] Disconnected
+[INFO - 2024-05-24 23:51:16.543505] Reconnected
+[INFO - 2024-05-24 23:51:16.547561] Connected clients: []
+[INFO - 2024-05-24 23:52:20.971370] Disconnected
+[INFO - 2024-05-24 23:52:21.480627] Reconnected
+[INFO - 2024-05-24 23:52:21.489048] Connected clients: []
+[INFO - 2024-05-24 23:54:10.806537] Connected clients: [1]
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-25 00:02:10.228655] Connected clients: [1]
+[INFO - 2024-05-25 00:02:10.659144] Connected clients: []
+[INFO - 2024-05-25 00:02:13.496557] Connected clients: [1]
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-25 00:03:17.967932] Connected clients: [1]
+[INFO - 2024-05-25 00:03:49.345099] Disconnected
+[INFO - 2024-05-25 00:03:49.867289] Reconnected
+[INFO - 2024-05-25 00:03:49.870405] Connected clients: []
+[INFO - 2024-05-25 00:03:49.907613] Connected clients: [1]
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-25 00:04:06.526542] Connected clients: [1]
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-25 00:04:35.388292] Connected clients: [1]
+[INFO - 2024-05-25 00:04:36.313887] Checking connection
+[INFO - 2024-05-25 00:04:37.314772] Checking connection
+[INFO - 2024-05-25 00:04:38.314664] Checking connection
+[INFO - 2024-05-25 00:04:39.314723] Checking connection
+[INFO - 2024-05-25 00:04:40.315164] Checking connection
+[INFO - 2024-05-25 00:04:41.313310] Checking connection
+[INFO - 2024-05-25 00:04:42.314636] Checking connection
+[INFO - 2024-05-25 00:04:43.314561] Checking connection
+[INFO - 2024-05-25 00:04:44.315536] Checking connection
+[INFO - 2024-05-25 00:04:45.314603] Checking connection
+[INFO - 2024-05-25 00:04:46.314831] Checking connection
+[INFO - 2024-05-25 00:04:47.314632] Checking connection
+[INFO - 2024-05-25 00:04:48.314364] Checking connection
+[INFO - 2024-05-25 00:04:49.314438] Checking connection
+[INFO - 2024-05-25 00:04:50.315700] Checking connection
+[INFO - 2024-05-25 00:04:51.315373] Checking connection
+[INFO - 2024-05-25 00:04:52.315072] Checking connection
+[INFO - 2024-05-25 00:04:53.314409] Checking connection
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-25 00:04:55.492201] Connected clients: [1]
+[INFO - 2024-05-25 00:04:56.444406] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:04:57.444800] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:04:58.444905] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:04:59.444673] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:00.445038] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:01.444128] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:02.236556] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:02.240649] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:02.263514] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:02.444649] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:02.834815] Network bandwidth: 3 KB/s
+[INFO - 2024-05-25 00:05:03.444428] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:03.844661] Network bandwidth: 5 KB/s
+[INFO - 2024-05-25 00:05:04.444523] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:04.858750] Network bandwidth: 1 KB/s
+[INFO - 2024-05-25 00:05:05.444953] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:05.883828] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:06.444754] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:06.834828] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:07.445371] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:07.821935] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:08.445592] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:08.818359] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:09.443987] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:09.893927] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:10.445452] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:10.814965] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:11.444283] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:11.792709] Network bandwidth: 3 KB/s
+[INFO - 2024-05-25 00:05:12.445712] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:12.792944] Network bandwidth: 3 KB/s
+[INFO - 2024-05-25 00:05:13.445253] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:13.861361] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:14.444643] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:14.835108] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:15.445234] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:15.817317] Network bandwidth: 1 KB/s
+[INFO - 2024-05-25 00:05:16.444619] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:16.827614] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:17.444825] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:17.848729] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:18.443855] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:18.856638] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:19.444030] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:19.885154] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:20.444795] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:20.858176] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:21.444873] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:21.843474] Network bandwidth: 38 KB/s
+[INFO - 2024-05-25 00:05:22.445349] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:22.927248] Network bandwidth: 1 KB/s
+[INFO - 2024-05-25 00:05:23.444819] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:23.810293] Network bandwidth: 1 KB/s
+[INFO - 2024-05-25 00:05:24.444938] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:24.821379] Network bandwidth: 1 KB/s
+[INFO - 2024-05-25 00:05:25.445009] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:25.885835] Network bandwidth: 27 KB/s
+[INFO - 2024-05-25 00:05:26.445942] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:26.861886] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:27.445282] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:27.862746] Network bandwidth: 58 KB/s
+[INFO - 2024-05-25 00:05:28.445012] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:28.939355] Network bandwidth: 16 KB/s
+[INFO - 2024-05-25 00:05:29.446247] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:29.853544] Network bandwidth: 9 KB/s
+[INFO - 2024-05-25 00:05:30.445054] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:30.849010] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:31.444237] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:31.810391] Network bandwidth: 2 KB/s
+[INFO - 2024-05-25 00:05:32.445115] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:32.819489] Network bandwidth: 3 KB/s
+[INFO - 2024-05-25 00:05:33.444625] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:33.845868] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:34.444792] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:34.842524] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:35.444570] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:35.839650] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:36.446054] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:36.826685] Network bandwidth: 1 KB/s
+[INFO - 2024-05-25 00:05:37.444204] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:37.876600] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:38.444851] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:38.832886] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:39.445453] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:39.826642] Network bandwidth: 11 KB/s
+[INFO - 2024-05-25 00:05:40.445418] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:40.891370] Network bandwidth: 2 KB/s
+[INFO - 2024-05-25 00:05:41.444030] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:41.846656] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:42.445235] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:42.818267] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:43.445457] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:43.828624] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:44.444373] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:44.882487] Network bandwidth: 13 KB/s
+[INFO - 2024-05-25 00:05:45.444110] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:45.854725] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:46.444494] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:46.824217] Network bandwidth: 9 KB/s
+[INFO - 2024-05-25 00:05:47.445157] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:47.839576] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:48.445097] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:48.828825] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:05:49.488381] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:49.860709] Network bandwidth: 7 KB/s
+[INFO - 2024-05-25 00:05:50.444126] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:51.224337] Network bandwidth: 24 KB/s
+[INFO - 2024-05-25 00:05:51.445150] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:52.071221] Network bandwidth: 22 KB/s
+[INFO - 2024-05-25 00:05:52.445086] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:52.852679] Network bandwidth: 12 KB/s
+[INFO - 2024-05-25 00:05:53.445360] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:53.873917] Network bandwidth: 1 KB/s
+[INFO - 2024-05-25 00:05:54.444216] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:54.855823] Network bandwidth: 3 KB/s
+[INFO - 2024-05-25 00:05:55.444765] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:55.875701] Network bandwidth: 1 KB/s
+[INFO - 2024-05-25 00:05:56.443992] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:56.901630] Network bandwidth: 7 KB/s
+[INFO - 2024-05-25 00:05:57.444826] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:58.034403] Network bandwidth: 18 KB/s
+[INFO - 2024-05-25 00:05:58.444918] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:05:59.030423] Network bandwidth: 26 KB/s
+[INFO - 2024-05-25 00:05:59.445191] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:00.010373] Network bandwidth: 5 KB/s
+[INFO - 2024-05-25 00:06:00.445261] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:00.925324] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:06:01.444788] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:01.891583] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:06:02.444556] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:02.866514] Network bandwidth: 45 KB/s
+[INFO - 2024-05-25 00:06:03.444357] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:03.895805] Network bandwidth: 77 KB/s
+[INFO - 2024-05-25 00:06:04.444574] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:04.884704] Network bandwidth: 117 KB/s
+[INFO - 2024-05-25 00:06:05.444394] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:05.873153] Network bandwidth: 130 KB/s
+[INFO - 2024-05-25 00:06:06.444447] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:06.841618] Network bandwidth: 90 KB/s
+[INFO - 2024-05-25 00:06:07.444661] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:07.878912] Network bandwidth: 1 KB/s
+[INFO - 2024-05-25 00:06:08.444376] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:08.863714] Network bandwidth: 89 KB/s
+[INFO - 2024-05-25 00:06:09.444659] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:09.915559] Network bandwidth: 121 KB/s
+[INFO - 2024-05-25 00:06:10.444282] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:10.827844] Network bandwidth: 93 KB/s
+[INFO - 2024-05-25 00:06:11.444305] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:11.835427] Network bandwidth: 90 KB/s
+[INFO - 2024-05-25 00:06:12.445088] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:12.892940] Network bandwidth: 4 KB/s
+[INFO - 2024-05-25 00:06:13.444836] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:13.837646] Network bandwidth: 124 KB/s
+[INFO - 2024-05-25 00:06:14.445064] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:14.887498] Network bandwidth: 158 KB/s
+[INFO - 2024-05-25 00:06:15.444044] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:15.878697] Network bandwidth: 72 KB/s
+[INFO - 2024-05-25 00:06:16.444959] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:16.897305] Network bandwidth: 1 KB/s
+[INFO - 2024-05-25 00:06:17.444238] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:17.921388] Network bandwidth: 2 KB/s
+[INFO - 2024-05-25 00:06:18.445400] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:18.862356] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:06:19.445037] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:19.877248] Network bandwidth: 37 KB/s
+[INFO - 2024-05-25 00:06:20.445032] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:20.886253] Network bandwidth: 12 KB/s
+[INFO - 2024-05-25 00:06:21.444607] _sendNetworkBandwith has been called
+[INFO - 2024-05-25 00:06:22.012385] Network bandwidth: 62 KB/s
+[INFO - 2024-05-25 00:06:23.097468] Network bandwidth: 62 KB/s
+[INFO - 2024-05-25 00:06:24.022673] Network bandwidth: 4 KB/s
+[INFO - 2024-05-25 00:06:24.950785] Network bandwidth: 13 KB/s
+[INFO - 2024-05-25 00:06:25.918850] Network bandwidth: 6 KB/s
+[INFO - 2024-05-25 00:06:26.916702] Network bandwidth: 3 KB/s
+[INFO - 2024-05-25 00:06:27.884023] Network bandwidth: 2 KB/s
+[INFO - 2024-05-25 00:06:28.901954] Network bandwidth: 8 KB/s
+[INFO - 2024-05-25 00:06:29.908801] Network bandwidth: 12 KB/s
+[INFO - 2024-05-25 00:06:30.871886] Network bandwidth: 13 KB/s
+[INFO - 2024-05-25 00:06:31.919345] Network bandwidth: 308 KB/s
+[INFO - 2024-05-25 00:06:32.877273] Network bandwidth: 192 KB/s
+[INFO - 2024-05-25 00:06:33.856654] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:06:34.926563] Network bandwidth: 5 KB/s
+[INFO - 2024-05-25 00:06:35.894412] Network bandwidth: 0 KB/s
+[INFO - 2024-05-25 00:06:36.935222] Network bandwidth: 1 KB/s
+[INFO - 2024-05-25 00:06:37.909136] Network bandwidth: 1 KB/s
+[INFO - 2024-05-25 00:06:38.965786] Network bandwidth: 13 KB/s
+[INFO - 2024-05-25 00:06:40.192147] Network bandwidth: 16 KB/s
+[INFO - 2024-05-25 00:06:41.287601] Network bandwidth: 66 KB/s
+[INFO - 2024-05-25 00:06:42.183946] Network bandwidth: 22 KB/s
+[INFO - 2024-05-25 00:06:43.032210] Network bandwidth: 55 KB/s
+[INFO - 2024-05-25 00:06:44.435221] Network bandwidth: 13 KB/s
+[INFO - 2024-05-25 00:07:06.751722] Connected clients: []
+[INFO - 2024-05-25 00:07:11.000265] Connected clients: [1]
+[INFO - 2024-05-25 00:07:42.478676] Connected clients: []
+[INFO - 2024-05-25 00:07:46.529360] Connected clients: [1]
+[INFO - 2024-05-25 00:09:10.340337] Disconnected
+[INFO - 2024-05-25 00:09:10.870420] Reconnected
+[INFO - 2024-05-25 00:09:10.885138] Connected clients: []
+[INFO - 2024-05-25 00:09:10.897507] Connected clients: [1]
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-25 00:09:41.116630] Connected clients: []
+[INFO - 2024-05-25 00:09:43.849499] Connected clients: [1]
+[INFO - 2024-05-25 00:10:37.579361] Connected clients: []
+[INFO - 2024-05-25 00:10:42.027661] Connected clients: [1]
+[INFO - 2024-05-25 00:10:42.211189] Disconnected
+[INFO - 2024-05-25 00:10:42.731306] Reconnected
+[INFO - 2024-05-25 00:10:42.747645] Connected clients: []
+[INFO - 2024-05-25 00:10:42.789635] Connected clients: [1]
+[INFO - 2024-05-25 00:12:05.998545] Connected clients: []
+Instance "GetMaterialController" has been initialized
+[INFO - 2024-05-25 00:43:51.491175] Connceted
+[INFO - 2024-05-25 00:43:51.597941] Connected clients: [1]
