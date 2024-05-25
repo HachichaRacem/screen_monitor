@@ -580,12 +580,12 @@ class MainControllerDesktop extends GetxController {
   }
 
   Future<void> _executeShutdown() async {
-    /*final ProcessResult result =
+    final ProcessResult result =
         await Process.run("shutdown", ["/s"], runInShell: true);
     if (result.exitCode != 0 || result.stderr.isNotEmpty) {
       Get.log(
           "[ERROR - ${DateTime.now()}] Failed to shutdown PC (ERROR) - ${result.stderr}");
-    }*/
+    }
     Get.log("[INFO - ${DateTime.now()}] PC should be shutting down now");
   }
 }
