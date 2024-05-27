@@ -70,17 +70,17 @@ class SettingsScreenDesktop extends GetView<MainControllerDesktop> {
               SettingsInputField(
                 textEditingController: controller.uploadTimerController,
                 initialValue: controller.uploadTimerInitialValue,
-                saveBtnEnabled: controller.uploadTimerSaveBtnEnabled,
-                fieldEnabled: controller.uploadTimerEnabled,
-                saveBtnLoading: controller.uploadTimerSaveBtnLoading,
+                saveBtnEnabled: controller.isUploadTimerSaveBtnEnabled,
+                fieldEnabled: controller.isUploadTimerFieldEnabled,
+                saveBtnLoading: controller.isUploadTimerSaveBtnLoading,
                 onSaveBtnPress: controller.onUploadTimerSaveClick,
               ),
               SettingsInputField(
                 textEditingController: controller.urgentActionTimerController,
                 initialValue: controller.urgentActionTimerInitialValue,
-                saveBtnEnabled: controller.urgenttimerSaveBtnEnabled,
-                fieldEnabled: controller.urgentActionTimerEnabled,
-                saveBtnLoading: controller.urgenttimerSaveBtnLoading,
+                saveBtnEnabled: controller.isUrgentTimerSaveBtnEnabled,
+                fieldEnabled: controller.isUrgentActionTimerFieldEnabled,
+                saveBtnLoading: controller.isUrgentTimerSaveBtnLoading,
                 onSaveBtnPress: controller.onUrgentTimerSaveClick,
               ),
               Obx(

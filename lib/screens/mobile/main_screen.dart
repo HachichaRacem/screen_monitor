@@ -13,6 +13,7 @@ class MainScreenMobile extends GetView<MainControllerMobile> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        forceMaterialTransparency: true,
         title: Obx(
           () => Tooltip(
             message: controller.isOtherDeviceConnected.value
@@ -36,143 +37,143 @@ class MainScreenMobile extends GetView<MainControllerMobile> {
               alignment: Alignment.topCenter,
               child: LoadingAcitivity(),
             ),
-            Expanded(
+            Flexible(
               child: Column(
                 children: [
-                  Expanded(
-                    flex: 2,
+                  Obx(
+                    () => controller.latestCapture.value.isEmpty
+                        ? const SizedBox(height: 180)
+                        : InteractiveViewer(
+                            child: Image.memory(
+                              controller.latestCapture.value,
+                              alignment: Alignment.bottomCenter,
+                              filterQuality: FilterQuality.high,
+                            ),
+                          ),
+                  ),
+                  Flexible(
                     child: Obx(
-                      () => controller.latestCapture.value.isEmpty
-                          ? const SizedBox()
-                          : InteractiveViewer(
-                              child: Image.memory(
-                                controller.latestCapture.value,
-                                fit: BoxFit.contain,
-                                filterQuality: FilterQuality.high,
+                      () => SingleChildScrollView(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 10.0),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text("General information",
+                                    style: Get.textTheme.titleMedium),
                               ),
                             ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Obx(
-                      () => Padding(
-                        padding: const EdgeInsets.only(bottom: 16),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 10.0),
-                                child: Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text("General information",
-                                      style: Get.textTheme.titleMedium),
-                                ),
+                            InfoTile(
+                                title: "Upload Timer",
+                                value: controller.uploadTimerValue.value),
+                            InfoTile(
+                                title: "Urgent action Timer",
+                                value: controller.urgentActionTimerValue.value),
+                            InfoTile(
+                                title: "Urgent action Timer status",
+                                value: controller.isUrgentActionActive.value
+                                    ? "Active"
+                                    : "Inactive"),
+                            InfoTile(
+                                title: "Urgent action type",
+                                value: controller.urgentActionType.value),
+                            InfoTile(
+                                title: "Network activity",
+                                value: controller.networkBandwith.value),
+                            InfoTile(
+                                title: "CPU Temperature",
+                                value: controller.cpuTemperature.value),
+                            InfoTile(
+                                title: "GPU Temperature",
+                                value: controller.gpuTemperature.value),
+                            InfoTile(
+                                title: "Battery Status",
+                                value: controller.batteryPercentage.value),
+                            const SizedBox(height: 10),
+                            ElevatedButton(
+                              onPressed: controller.onStartUrgentActionClick,
+                              child: Obx(
+                                () => Text(controller.isUrgentActionActive.value
+                                    ? "Stop urgent action (${controller.urgentActionTimeRemaining})"
+                                    : "Start urgent action"),
                               ),
-                              InfoTile(
-                                  title: "Upload Timer",
-                                  value: controller.uploadTimerValue.value),
-                              InfoTile(
-                                  title: "Urgent action Timer",
-                                  value:
-                                      controller.urgentActionTimerValue.value),
-                              InfoTile(
-                                  title: "Urgent action Timer status",
-                                  value: controller.isUrgentActionActive.value
-                                      ? "Active"
-                                      : "Inactive"),
-                              InfoTile(
-                                  title: "Urgent action type",
-                                  value: controller.urgentActionType.value),
-                              InfoTile(
-                                  title: "Network activity",
-                                  value: controller.networkBandwith.value),
-                              const SizedBox(height: 10),
-                              ElevatedButton(
-                                onPressed: controller.onStartUrgentActionClick,
-                                child: Obx(
-                                  () => Text(controller
-                                          .isUrgentActionActive.value
-                                      ? "Stop urgent action (${controller.urgentActionTimeRemaining})"
-                                      : "Start urgent action"),
-                                ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(bottom: 10.0, top: 10),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text("Quick actions",
+                                    style: Get.textTheme.titleMedium),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    bottom: 10.0, top: 10),
-                                child: Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text("Quick actions",
-                                      style: Get.textTheme.titleMedium),
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  const Spacer(),
-                                  Flexible(
-                                    flex: 2,
-                                    child: TextField(
-                                      textAlign: TextAlign.center,
-                                      controller:
-                                          controller.uploadTimerController,
-                                      onSubmitted:
-                                          controller.onUploadTimerSubmit,
-                                      keyboardType: TextInputType.number,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly
-                                      ],
-                                      decoration: InputDecoration(
-                                        labelText: "Upload timer",
-                                        labelStyle: Get.textTheme.labelSmall,
-                                        floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
-                                        alignLabelWithHint: true,
-                                        border: const OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(4.0),
-                                          ),
-                                          borderSide: BorderSide.none,
+                            ),
+                            Row(
+                              children: [
+                                const Spacer(),
+                                Flexible(
+                                  flex: 2,
+                                  child: TextField(
+                                    textAlign: TextAlign.center,
+                                    controller:
+                                        controller.uploadTimerController,
+                                    onSubmitted: controller.onUploadTimerSubmit,
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    decoration: InputDecoration(
+                                      labelText: "Upload timer",
+                                      labelStyle: Get.textTheme.labelSmall,
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.never,
+                                      alignLabelWithHint: true,
+                                      border: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(4.0),
                                         ),
-                                        filled: true,
-                                        isDense: true,
+                                        borderSide: BorderSide.none,
                                       ),
+                                      filled: true,
+                                      isDense: true,
                                     ),
                                   ),
-                                  const SizedBox(width: 26),
-                                  Flexible(
-                                    flex: 2,
-                                    child: TextField(
-                                      onSubmitted:
-                                          controller.onUrgentActionTimerSubmit,
-                                      controller:
-                                          controller.urgentTimerController,
-                                      keyboardType: TextInputType.number,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly
-                                      ],
-                                      textAlign: TextAlign.center,
-                                      decoration: InputDecoration(
-                                        labelText: "Urgent action timer",
-                                        labelStyle: Get.textTheme.labelSmall,
-                                        floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
-                                        alignLabelWithHint: true,
-                                        border: const OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(4.0),
-                                          ),
-                                          borderSide: BorderSide.none,
+                                ),
+                                const SizedBox(width: 26),
+                                Flexible(
+                                  flex: 2,
+                                  child: TextField(
+                                    onSubmitted:
+                                        controller.onUrgentActionTimerSubmit,
+                                    controller:
+                                        controller.urgentTimerController,
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    textAlign: TextAlign.center,
+                                    decoration: InputDecoration(
+                                      labelText: "Urgent action timer",
+                                      labelStyle: Get.textTheme.labelSmall,
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.never,
+                                      alignLabelWithHint: true,
+                                      border: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(4.0),
                                         ),
-                                        filled: true,
-                                        isDense: true,
+                                        borderSide: BorderSide.none,
                                       ),
+                                      filled: true,
+                                      isDense: true,
                                     ),
                                   ),
-                                  const Spacer(),
-                                ],
-                              )
-                            ],
-                          ),
+                                ),
+                                const Spacer(),
+                              ],
+                            )
+                          ],
                         ),
                       ),
                     ),

@@ -9,19 +9,6 @@ import 'package:get/get.dart';
 import 'package:image_compression/image_compression.dart';
 import 'package:web_socket_client/web_socket_client.dart';
 
-// So far so good buddy
-// All the data in the mobile now updates if changed in the database
-// The urgent action is nicely taken remotely now
-// Both apps work as expected and as needed.
-
-// you were lastly thinking of showing some network bandwith or such information about the PC
-// but failed as there are no commands to do so, no mini script nor packages on pub.dev
-// Keep searching buddy !
-
-// Add more feedback "last exit reason", a toast saying "PC is shutting down now..",
-
-// Long term goals, refactoring and cleaning code in the backend, desktop and mobile
-
 class MainControllerDesktop extends GetxController {
   // Global configuration
   final int clientID = 0;
@@ -32,14 +19,12 @@ class MainControllerDesktop extends GetxController {
   final RxBool showLoadingActivity = true.obs;
   final Rx<double?> progressIndicatorValue = Rx(null);
   final RxBool isConnected = false.obs;
-  final RxInt selectedNavBarIndex =
-      0.obs; // 0 = Home Screen, 1 = Settings Screen
+  final RxInt selectedNavBarIndex = 0.obs;
   final RxBool isOtherDeviceConnected = false.obs;
   final Rx<Uint8List> latestCapture = Rx(Uint8List(0));
   final RxBool isProcessOn = false.obs;
 
   // Process related variables
-  RxBool isWaitOver = false.obs;
   Timer? timer;
   Completer? _taskCompleter;
 
@@ -50,8 +35,8 @@ class MainControllerDesktop extends GetxController {
 
   final RxBool shutdownEnabled = false.obs;
 
-  final RxBool uploadTimerEnabled = false.obs;
-  final RxBool urgentActionTimerEnabled = false.obs;
+  final RxBool isUploadTimerFieldEnabled = false.obs;
+  final RxBool isUrgentActionTimerFieldEnabled = false.obs;
 
   final TextEditingController uploadTimerController = TextEditingController();
   final TextEditingController urgentActionTimerController =
@@ -60,11 +45,11 @@ class MainControllerDesktop extends GetxController {
   final RxString uploadTimerInitialValue = "".obs;
   final RxString urgentActionTimerInitialValue = "".obs;
 
-  final RxBool uploadTimerSaveBtnEnabled = false.obs;
-  final RxBool uploadTimerSaveBtnLoading = false.obs;
+  final RxBool isUploadTimerSaveBtnEnabled = false.obs;
+  final RxBool isUploadTimerSaveBtnLoading = false.obs;
 
-  final RxBool urgenttimerSaveBtnEnabled = false.obs;
-  final RxBool urgenttimerSaveBtnLoading = false.obs;
+  final RxBool isUrgentTimerSaveBtnEnabled = false.obs;
+  final RxBool isUrgentTimerSaveBtnLoading = false.obs;
 
   Completer? _updateUploadTimerTask;
   Completer? _updateUrgentTimerTask;
@@ -83,6 +68,7 @@ class MainControllerDesktop extends GetxController {
       await _connectToServer();
       Timer.periodic(const Duration(seconds: 1), (timer) {
         _sendNetworkBandwith();
+        _sendSystemInfos();
       });
     } catch (e, stack) {
       Get.log("[ERROR - ${DateTime.now()}] Failed to connect (ERROR) - $e",
@@ -169,7 +155,10 @@ class MainControllerDesktop extends GetxController {
         } else {
           Get.log(
               "[ERROR - ${DateTime.now()}] Failed to update upload timer (response failed from server)");
-          _updateUploadTimerTask?.completeError(payload['error']);
+          if (_updateUploadTimerTask != null &&
+              !_updateUploadTimerTask!.isCompleted) {
+            _updateUploadTimerTask?.completeError(payload['error']);
+          }
         }
         break;
       case "URGENT_ACTION_TIMER":
@@ -184,7 +173,10 @@ class MainControllerDesktop extends GetxController {
         } else {
           Get.log(
               "[ERROR - ${DateTime.now()}] Failed to update urgent timer (response failed from server)");
-          _updateUrgentTimerTask?.completeError(payload['error']);
+          if (_updateUrgentTimerTask != null &&
+              !_updateUrgentTimerTask!.isCompleted) {
+            _updateUrgentTimerTask?.completeError(payload['error']);
+          }
         }
         break;
       case "IS_URGENT_ACTION_ACTIVE":
@@ -198,7 +190,7 @@ class MainControllerDesktop extends GetxController {
           Get.log(
               "[ERROR - ${DateTime.now()}] Failed to upload capture (response failed from server) : ${payload['error']}");
           showLoadingActivity.value = false;
-          if (_taskCompleter != null) {
+          if (_taskCompleter != null && !_taskCompleter!.isCompleted) {
             _taskCompleter!.completeError(payload['error']);
           }
         }
@@ -210,18 +202,13 @@ class MainControllerDesktop extends GetxController {
   }
 
   _handleIsUrgentActionActive(Map payload) {
-    Get.log(
-        "[INFO - ${DateTime.now()}] _handleIsUrgentActionActive has been called with payload: $payload");
     if (payload['value'] != null) {
       final bool isUrgentActionActive = payload['value'];
       if (isUrgentActionActive) {
         if (payload['extra']['urgentAction'] != null) {
-          final int urgentAction = payload['extra']['urgentAction'];
-          if (urgentAction == 0) {
+          if (payload['extra']['urgentAction'] == 0) {
             shutdownEnabled.value = true;
-            if (urgentActionTimer != null) {
-              urgentActionTimer?.cancel();
-            }
+            urgentActionTimer?.cancel();
             Get.log(
                 "[INFO - ${DateTime.now()}] Shutdown urgent action timer is about to begin");
             urgentActionTimer =
@@ -276,11 +263,11 @@ class MainControllerDesktop extends GetxController {
     }
     uploadTimerController.text = "${payload['timer_interval'] ?? 60}";
     uploadTimerInitialValue.value = "${payload['timer_interval'] ?? 60}";
-    uploadTimerEnabled.value = true;
+    isUploadTimerFieldEnabled.value = true;
     urgentActionTimerController.text = "${payload['urgent_action_timer'] ?? 0}";
     urgentActionTimerInitialValue.value =
         "${payload['urgent_action_timer'] ?? 0}";
-    urgentActionTimerEnabled.value = true;
+    isUrgentActionTimerFieldEnabled.value = true;
     urgentActionType = payload['urgent_action_type'] ?? 0;
   }
 
@@ -345,6 +332,66 @@ class MainControllerDesktop extends GetxController {
             "[ERROR - ${DateTime.now()}] Failed to fetch network bandwidth (ERROR) - ${receivedBytesResult.stderr}");
       }
     }
+  }
+
+  void _sendSystemInfos() async {
+    Process.run(
+      "powershell.exe",
+      [
+        '(nvidia-smi -q -d TEMPERATURE | Select-String -Pattern "GPU Current Temp").Line.replace(" ", "")'
+      ],
+      runInShell: true,
+    ).then((result) {
+      if (result.stderr.isEmpty) {
+        webSocket.send(
+          json.encode(
+            {
+              "type": "GPU_TEMPERATURE",
+              "value": (result.stdout as String)
+                  .split(":")[1]
+                  .trim()
+                  .replaceAll("C", " C")
+            },
+          ),
+        );
+      }
+    });
+    Process.run(
+            "powershell.exe",
+            [
+              '(Get-Counter -Counter "\\Thermal Zone Information(*)\\Temperature" -MaxSamples 1).CounterSamples.RawValue'
+            ],
+            runInShell: true)
+        .then((result) {
+      if (result.stderr.isEmpty) {
+        double cpuTemp =
+            (double.parse((result.stdout as String).trim())) - 273.15;
+        webSocket.send(
+          json.encode(
+            {
+              "type": "CPU_TEMPERATURE",
+              "value": "${cpuTemp.toStringAsFixed(0)} C"
+            },
+          ),
+        );
+      }
+    });
+    Process.run("powershell.exe",
+            ['(Get-WmiObject Win32_Battery).EstimatedChargeRemaining'],
+            runInShell: true)
+        .then((result) {
+      if (result.stderr.isEmpty) {
+        double batteryStatus = (double.parse((result.stdout as String).trim()));
+        webSocket.send(
+          json.encode(
+            {
+              "type": "BATTERY_STATUS",
+              "value": "${batteryStatus.toStringAsFixed(0)} %"
+            },
+          ),
+        );
+      }
+    });
   }
 
   Future<void> onPlayButtonPress() async {
@@ -484,7 +531,7 @@ class MainControllerDesktop extends GetxController {
       if (uploadTimerController.text.isNotEmpty) {
         int uploadTime = int.parse(uploadTimerController.text);
         _updateUploadTimerTask = Completer();
-        uploadTimerSaveBtnLoading.value = true;
+        isUploadTimerSaveBtnLoading.value = true;
         _updateUploadTimer(uploadTime);
         await _updateUploadTimerTask!.future
             .timeout(const Duration(seconds: 30));
@@ -501,8 +548,8 @@ class MainControllerDesktop extends GetxController {
             "[ERROR - ${DateTime.now()}] Failed to update upload timer (STACK) - $stack");
       }
     } finally {
-      uploadTimerSaveBtnEnabled.value = false;
-      uploadTimerSaveBtnLoading.value = false;
+      isUploadTimerSaveBtnEnabled.value = false;
+      isUploadTimerSaveBtnLoading.value = false;
     }
   }
 
@@ -518,7 +565,7 @@ class MainControllerDesktop extends GetxController {
       if (urgentActionTimerController.text.isNotEmpty) {
         int urgentTime = int.parse(urgentActionTimerController.text);
         _updateUrgentTimerTask = Completer();
-        urgenttimerSaveBtnLoading.value = true;
+        isUrgentTimerSaveBtnLoading.value = true;
         _updateUrgentTimer(urgentTime);
         await _updateUrgentTimerTask!.future
             .timeout(const Duration(seconds: 30));
@@ -535,8 +582,8 @@ class MainControllerDesktop extends GetxController {
             "[ERROR - ${DateTime.now()}] Failed to update urgent timer (STACK) - $stack");
       }
     } finally {
-      urgenttimerSaveBtnEnabled.value = false;
-      urgenttimerSaveBtnLoading.value = false;
+      isUrgentTimerSaveBtnEnabled.value = false;
+      isUrgentTimerSaveBtnLoading.value = false;
     }
   }
 

@@ -27,6 +27,9 @@ class MainControllerMobile extends GetxController {
   final RxString urgentActionTimerValue = "...".obs;
   final RxString urgentActionType = "...".obs;
   final RxString networkBandwith = "- KB/s".obs;
+  final RxString cpuTemperature = "- C".obs;
+  final RxString gpuTemperature = "- C".obs;
+  final RxString batteryPercentage = "- %".obs;
   final RxBool isUrgentActionActive = false.obs;
   final RxInt urgentActionTimeRemaining = 0.obs;
 
@@ -192,6 +195,15 @@ class MainControllerMobile extends GetxController {
         break;
       case "NETWORK_BANDWITH":
         networkBandwith.value = payload['value'];
+        break;
+      case "CPU_TEMPERATURE":
+        cpuTemperature.value = payload['value'];
+        break;
+      case "GPU_TEMPERATURE":
+        gpuTemperature.value = payload['value'];
+        break;
+      case "BATTERY_STATUS":
+        batteryPercentage.value = payload['value'];
         break;
       default:
         Get.log("[INFO - ${DateTime.now()}] Unknown update: $payload");
