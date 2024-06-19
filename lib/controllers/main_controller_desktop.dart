@@ -1,18 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
-import 'dart:typed_data';
+import 'dart:isolate';
 
+import 'package:ffi/ffi.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_compression/image_compression.dart';
 import 'package:web_socket_client/web_socket_client.dart';
+import 'package:win32/win32.dart';
 
 class MainControllerDesktop extends GetxController {
   // Global configuration
   final int clientID = 0;
-  final String apiUrl = "wss://monitor-backend-xutw.onrender.com";
+  static const String apiUrl = "wss://monitor-backend-xutw.onrender.com";
   late final webSocket = WebSocket(Uri.parse(apiUrl));
 
   // State management
@@ -56,9 +60,35 @@ class MainControllerDesktop extends GetxController {
   Completer? _shutdownUrgentActionTask;
 
   Timer? urgentActionTimer;
+  Isolate? _updateInfoIsolate;
 
   // Other variables
   final PageController pageController = PageController();
+
+  static Future<void> startWebSocket(String url) async {
+    final webSocket = WebSocket(Uri.parse(url));
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      try {
+        _sendNetworkBandwith(webSocket);
+        _sendGPUTemp(webSocket);
+        _sendCPUTemp(webSocket);
+        _sendBatteryInfo(webSocket);
+      } catch (e, stack) {
+        Get.log(
+            "[ERROR - ${DateTime.now()}] Failed to update system info (ERROR) - $e",
+            isError: true);
+        Get.log(
+            "[ERROR - ${DateTime.now()}] Failed to update system info (STACK) - $stack",
+            isError: true);
+      }
+    });
+  }
+
+  static void webSocketIsolateEntryPoint(SendPort sendPort) async {
+    final port = ReceivePort();
+    sendPort.send(port.sendPort);
+    startWebSocket(apiUrl);
+  }
 
   @override
   void onReady() async {
@@ -66,10 +96,6 @@ class MainControllerDesktop extends GetxController {
     try {
       showLoadingActivity.value = true;
       await _connectToServer();
-      Timer.periodic(const Duration(seconds: 1), (timer) {
-        _sendNetworkBandwith();
-        _sendSystemInfos();
-      });
     } catch (e, stack) {
       Get.log("[ERROR - ${DateTime.now()}] Failed to connect (ERROR) - $e",
           isError: true);
@@ -78,6 +104,34 @@ class MainControllerDesktop extends GetxController {
     } finally {
       showLoadingActivity.value = false;
     }
+  }
+
+  void _spawnIsolate() {
+    final ReceivePort receivePort = ReceivePort();
+    Isolate.spawn(webSocketIsolateEntryPoint, receivePort.sendPort).then(
+      (isolate) {
+        Get.log(
+            "[INFO - ${DateTime.now()}] Isolate to update system info spawned successfully");
+        _updateInfoIsolate = isolate;
+      },
+      onError: (error, stack) => Get.log(
+        "[ERROR - ${DateTime.now()}] Isolate did not spawn (ERROR + STACK) - $error\n$stack",
+      ),
+    );
+  }
+
+  void _killIsolate() {
+    if (_updateInfoIsolate != null) {
+      Get.log("[INFO - ${DateTime.now()}] Killed isolate");
+      _updateInfoIsolate!.kill(priority: Isolate.immediate);
+    }
+  }
+
+  @override
+  void onClose() {
+    webSocket.close();
+    _killIsolate();
+    super.onClose();
   }
 
   // Server communication methods
@@ -90,17 +144,21 @@ class MainControllerDesktop extends GetxController {
         case Connected():
           Get.log("[INFO - ${DateTime.now()}] Connceted");
           _sendHandshake();
+          _spawnIsolate();
           break;
         case Reconnecting():
+          _killIsolate();
           showLoadingActivity.value = true;
           break;
         case Reconnected():
           Get.log("[INFO - ${DateTime.now()}] Reconnected");
           _sendHandshake();
+          _spawnIsolate();
           break;
         case Disconnected():
           Get.log("[INFO - ${DateTime.now()}] Disconnected");
           isConnected.value = false;
+          _killIsolate();
           break;
       }
     });
@@ -257,16 +315,17 @@ class MainControllerDesktop extends GetxController {
   }
 
   _initSettingsParams(Map payload) {
-    if (payload['last_capture_url'] != null) {
+    if (payload['last_capture_url'] != "") {
       showLoadingActivity.value = true;
       _downloadCapture(payload['last_capture_url']);
     }
     uploadTimerController.text = "${payload['timer_interval'] ?? 60}";
     uploadTimerInitialValue.value = "${payload['timer_interval'] ?? 60}";
     isUploadTimerFieldEnabled.value = true;
-    urgentActionTimerController.text = "${payload['urgent_action_timer'] ?? 0}";
+    urgentActionTimerController.text =
+        "${payload['urgent_action_timer'] ?? 60}";
     urgentActionTimerInitialValue.value =
-        "${payload['urgent_action_timer'] ?? 0}";
+        "${payload['urgent_action_timer'] ?? 60}";
     isUrgentActionTimerFieldEnabled.value = true;
     urgentActionType = payload['urgent_action_type'] ?? 0;
   }
@@ -300,98 +359,281 @@ class MainControllerDesktop extends GetxController {
   }
 
   // Process methods
-  Future<void> _sendNetworkBandwith() async {
-    final fetchInterfaceName = await Process.run(
-        "Powershell.exe",
-        [
-          'Get-NetAdapter | ? status -eq "Up" | select interfaceDescription | ConvertTo-json'
-        ],
-        runInShell: true);
-    if (fetchInterfaceName.stderr.isEmpty) {
-      final String interfaceName =
-          json.decode(fetchInterfaceName.stdout)['interfaceDescription'];
-      final receivedBytesResult = await Process.run(
-        "Powershell.exe",
-        [
-          'Get-Counter "\\Network Interface(${interfaceName.replaceAll('(R)', '[R]')})\\Bytes Received/sec" | ConvertTo-json'
-        ],
-        runInShell: true,
+  static void _sendNetworkBandwith(WebSocket webSocket) async {
+    try {
+      var hr = CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final pLoc = IWbemLocator(calloc<COMObject>());
+
+      final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemLocator);
+      final iid = calloc<GUID>()..ref.setGUID(IID_IWbemLocator);
+
+      hr = CoCreateInstance(
+          clsid, nullptr, CLSCTX.CLSCTX_INPROC_SERVER, iid, pLoc.ptr.cast());
+
+      if (FAILED(hr)) {
+        final exception = WindowsException(hr);
+        Get.log(exception.convertWindowsErrorToString(hr));
+
+        CoUninitialize();
+        throw exception;
+      }
+
+      final proxy = calloc<Pointer<COMObject>>();
+
+      hr = pLoc.connectServer(
+        TEXT('ROOT\\CIMV2'),
+        nullptr,
+        nullptr,
+        nullptr,
+        NULL,
+        nullptr,
+        nullptr,
+        proxy,
       );
-      if (receivedBytesResult.stderr.isEmpty) {
-        final interfaceInfo =
-            json.decode(receivedBytesResult.stdout)['CounterSamples'][0];
-        final int kiloBytesPerSecond =
-            (interfaceInfo['CookedValue'] / 1024).toInt();
+
+      if (FAILED(hr)) {
+        final exception = WindowsException(hr);
+        Get.log(exception.convertWindowsErrorToString(hr));
+        CoUninitialize();
+        throw exception;
+      }
+
+      final pSvc = IWbemServices(proxy.cast());
+
+      hr = CoSetProxyBlanket(
+        proxy.value,
+        RPC_C_AUTHN_WINNT,
+        RPC_C_AUTHZ_NONE,
+        nullptr,
+        RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_CALL,
+        RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE,
+        nullptr,
+        EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE,
+      );
+
+      if (FAILED(hr)) {
+        final exception = WindowsException(hr);
+        Get.log(exception.convertWindowsErrorToString(hr));
+        CoUninitialize();
+        throw exception;
+      }
+
+      final pEnumerator = calloc<Pointer<COMObject>>();
+      IEnumWbemClassObject enumerator;
+
+      hr = pSvc.execQuery(
+          TEXT('WQL'),
+          TEXT('SELECT * FROM Win32_PerfFormattedData_Tcpip_NetworkInterface'),
+          WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_FORWARD_ONLY |
+              WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
+          nullptr,
+          pEnumerator);
+
+      if (FAILED(hr)) {
+        final exception = WindowsException(hr);
+        Get.log(exception.convertWindowsErrorToString(hr));
+
+        CoUninitialize();
+
+        throw exception;
+      } else {
+        enumerator = IEnumWbemClassObject(pEnumerator.cast());
+
+        Pointer<Uint32> uReturn = calloc<Uint32>();
+
+        double maxDownloadSpeed = -1;
+
+        while (enumerator.ptr.address > 0) {
+          final pClsObj = calloc<IntPtr>();
+
+          hr = enumerator.next(WBEM_INFINITE, 1, pClsObj.cast(), uReturn);
+
+          if (uReturn.value == 0) break;
+
+          final clsObj = IWbemClassObject(pClsObj.cast());
+
+          final vtProp = calloc<VARIANT>();
+          hr = clsObj.get(
+              TEXT('BytesReceivedPersec'), 0, vtProp, nullptr, nullptr);
+          if (SUCCEEDED(hr)) {
+            final String strValue = vtProp.ref.bstrVal.toDartString();
+            final double? dValue = double.tryParse(strValue);
+            if (dValue != null && maxDownloadSpeed < dValue) {
+              maxDownloadSpeed = dValue / 1024;
+            }
+          }
+        }
         webSocket.send(
           json.encode(
-            {"type": "NETWORK_BANDWITH", "value": "$kiloBytesPerSecond KB/s"},
+            {
+              "type": "NETWORK_BANDWITH",
+              "value": "${maxDownloadSpeed.floor()} KB/s"
+            },
           ),
         );
-      } else {
-        Get.log(
-            "[ERROR - ${DateTime.now()}] Failed to fetch network bandwidth (ERROR) - ${receivedBytesResult.stderr}");
       }
+      CoUninitialize();
+    } catch (e, stack) {
+      Get.log(
+          "[ERROR - ${DateTime.now()}] Failed to send network bandwith (ERROR) - $e",
+          isError: true);
+      Get.log(
+          "[ERROR - ${DateTime.now()}] Failed to send network bandwith (STACK) - $stack",
+          isError: true);
     }
   }
 
-  void _sendSystemInfos() async {
-    Process.run(
-      "powershell.exe",
-      [
-        '(nvidia-smi -q -d TEMPERATURE | Select-String -Pattern "GPU Current Temp").Line.replace(" ", "")'
-      ],
-      runInShell: true,
-    ).then((result) {
-      if (result.stderr.isEmpty) {
-        webSocket.send(
-          json.encode(
-            {
-              "type": "GPU_TEMPERATURE",
-              "value": (result.stdout as String)
-                  .split(":")[1]
-                  .trim()
-                  .replaceAll("C", " C")
-            },
-          ),
-        );
+  static void _sendCPUTemp(WebSocket webSocket) {
+    var hr = CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    final pLoc = IWbemLocator(calloc<COMObject>());
+
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemLocator);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IWbemLocator);
+
+    hr = CoCreateInstance(
+        clsid, nullptr, CLSCTX.CLSCTX_INPROC_SERVER, iid, pLoc.ptr.cast());
+
+    if (FAILED(hr)) {
+      final exception = WindowsException(hr);
+      Get.log(exception.convertWindowsErrorToString(hr));
+
+      CoUninitialize();
+      throw exception;
+    }
+
+    final proxy = calloc<Pointer<COMObject>>();
+
+    hr = pLoc.connectServer(
+      TEXT('ROOT\\CIMV2'),
+      nullptr,
+      nullptr,
+      nullptr,
+      NULL,
+      nullptr,
+      nullptr,
+      proxy,
+    );
+
+    if (FAILED(hr)) {
+      final exception = WindowsException(hr);
+      Get.log(exception.convertWindowsErrorToString(hr));
+      CoUninitialize();
+      throw exception;
+    }
+
+    final pSvc = IWbemServices(proxy.cast());
+
+    hr = CoSetProxyBlanket(
+      proxy.value,
+      RPC_C_AUTHN_WINNT,
+      RPC_C_AUTHZ_NONE,
+      nullptr,
+      RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_CALL,
+      RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE,
+      nullptr,
+      EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE,
+    );
+
+    if (FAILED(hr)) {
+      final exception = WindowsException(hr);
+      Get.log(exception.convertWindowsErrorToString(hr));
+      CoUninitialize();
+      throw exception;
+    }
+
+    final pEnumerator = calloc<Pointer<COMObject>>();
+    IEnumWbemClassObject enumerator;
+
+    hr = pSvc.execQuery(
+        TEXT('WQL'),
+        TEXT(
+            'SELECT * FROM Win32_PerfFormattedData_Counters_ThermalZoneInformation'),
+        WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_FORWARD_ONLY |
+            WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
+        nullptr,
+        pEnumerator);
+
+    if (FAILED(hr)) {
+      final exception = WindowsException(hr);
+      Get.log(exception.convertWindowsErrorToString(hr));
+
+      CoUninitialize();
+
+      throw exception;
+    } else {
+      enumerator = IEnumWbemClassObject(pEnumerator.cast());
+
+      final uReturn = calloc<Uint32>();
+
+      while (enumerator.ptr.address > 0) {
+        final pClsObj = calloc<IntPtr>();
+
+        hr = enumerator.next(WBEM_INFINITE, 1, pClsObj.cast(), uReturn);
+
+        if (uReturn.value == 0) break;
+
+        final clsObj = IWbemClassObject(pClsObj.cast());
+
+        final vtProp = calloc<VARIANT>();
+        hr = clsObj.get(TEXT('Temperature'), 0, vtProp, nullptr, nullptr);
+
+        if (SUCCEEDED(hr)) {
+          webSocket.send(
+            json.encode(
+              {
+                "type": "CPU_TEMPERATURE",
+                "value": "${(vtProp.ref.intVal - 273.15).floor()} C",
+              },
+            ),
+          );
+        }
+        VariantClear(vtProp);
+        free(vtProp);
       }
-    });
-    Process.run(
-            "powershell.exe",
-            [
-              '(Get-Counter -Counter "\\Thermal Zone Information(*)\\Temperature" -MaxSamples 1).CounterSamples.RawValue'
-            ],
-            runInShell: true)
-        .then((result) {
-      if (result.stderr.isEmpty) {
-        double cpuTemp =
-            (double.parse((result.stdout as String).trim())) - 273.15;
-        webSocket.send(
-          json.encode(
-            {
-              "type": "CPU_TEMPERATURE",
-              "value": "${cpuTemp.toStringAsFixed(0)} C"
-            },
-          ),
-        );
+    }
+    CoUninitialize();
+  }
+
+  static void _sendGPUTemp(WebSocket webSocket) async {
+    final processResult =
+        Process.runSync("nvidia-smi", ["-q", "--id=0", "-d", "TEMPERATURE"]);
+    final String strResult =
+        processResult.stdout.toString().replaceAll(" ", "");
+    Match? m = RegExp(r'GPUCurrentTemp:(\d+)').firstMatch(strResult);
+    if (m != null) {
+      webSocket.send(
+        json.encode(
+          {
+            "type": "GPU_TEMPERATURE",
+            "value": "${m.group(1)} C",
+          },
+        ),
+      );
+    }
+  }
+
+  static void _sendBatteryInfo(WebSocket webSocket) {
+    final lpSystemPowerStatus = calloc<SYSTEM_POWER_STATUS>();
+    final hr = GetSystemPowerStatus(lpSystemPowerStatus);
+
+    if (SUCCEEDED(hr)) {
+      if (lpSystemPowerStatus.ref.BatteryFlag < 128) {
+        final batteryRemainingPercent =
+            lpSystemPowerStatus.ref.BatteryLifePercent;
+        if (batteryRemainingPercent <= 100) {
+          webSocket.send(
+            json.encode(
+              {"type": "BATTERY_STATUS", "value": "$batteryRemainingPercent %"},
+            ),
+          );
+        }
       }
-    });
-    Process.run("powershell.exe",
-            ['(Get-WmiObject Win32_Battery).EstimatedChargeRemaining'],
-            runInShell: true)
-        .then((result) {
-      if (result.stderr.isEmpty) {
-        double batteryStatus = (double.parse((result.stdout as String).trim()));
-        webSocket.send(
-          json.encode(
-            {
-              "type": "BATTERY_STATUS",
-              "value": "${batteryStatus.toStringAsFixed(0)} %"
-            },
-          ),
-        );
-      }
-    });
+      free(lpSystemPowerStatus);
+    }
   }
 
   Future<void> onPlayButtonPress() async {
@@ -420,8 +662,7 @@ class MainControllerDesktop extends GetxController {
       await _process();
       await _taskCompleter?.future;
       _taskCompleter = null;
-      Get.log(
-          "[INFO - ${DateTime.now()}] Process finished, starting timer...\n");
+      Get.log("[INFO - ${DateTime.now()}] Process finished, starting timer...");
       Timer.periodic(const Duration(seconds: 1), (timer) {
         if (isProcessOn.value) {
           int uploadTime = int.parse(uploadTimerInitialValue.value);
@@ -477,11 +718,8 @@ class MainControllerDesktop extends GetxController {
               pngCompression: PngCompression.bestCompression),
         ),
       );
-      final compressedFile = File("compressed.png")
-        ..writeAsBytesSync(output.rawBytes);
-      Get.log(
-          "[INFO - ${DateTime.now()}] Compressed capture - from ${capture.lengthSync()} bytes to ${compressedFile.lengthSync()} bytes");
-      return compressedFile.readAsBytesSync();
+      capture.writeAsBytesSync(output.rawBytes);
+      return output.rawBytes;
     } else {
       Get.log(
           "[ERROR - ${DateTime.now()}] Failed to compress capture - File does not exist");
